@@ -1,0 +1,2737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuxDrive – Luxury Cars</title>
+  <meta name="description"
+    content="Experience the perfect blend of performance, design, and sustainability with LuxDrive luxury cars." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --magic-1: #6366f1;
+      --magic-2: #a855f7;
+      --magic-3: #22d3ee;
+      --bg: #080c18;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+    }
+
+    @keyframes magic-flow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      z-index: 999;
+    }
+
+    .logo {
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #b0bdd0;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-cta {
+      padding: 9px 22px;
+      border-radius: 50px;
+      background: #fff;
+      color: #080c18;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #fff;
+      background: none;
+      border: none;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 620px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Full-bleed background image */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 50%;
+      z-index: 0;
+    }
+
+    /* Cinematic dark overlay */
+    .hero-overlay-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(8, 12, 24, 0.70) 0%,
+          rgba(8, 12, 24, 0.15) 40%,
+          rgba(8, 12, 24, 0.65) 85%,
+          rgba(8, 12, 24, 1) 100%);
+      z-index: 1;
+    }
+
+    /* Text content block */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 680px;
+      /* Push text up so the car shows below */
+      margin-top: -200px;
+    }
+
+    .hero-content p {
+      font-size: 1.18rem;
+      color: #d8e4f0;
+      line-height: 1.7;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+      margin-bottom: 34px;
+    }
+
+    /* Hero button group */
+    .hero-btn-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── Shared glassmorphism base ── */
+    .btn-hero-pill.primary {
+      background: linear-gradient(90deg, var(--magic-1), var(--magic-2), var(--magic-3), var(--magic-1));
+      background-size: 300% auto;
+      animation: magic-flow 6s linear infinite;
+      border: none;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .btn-hero-circle,
+    .btn-hero-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.08);
+      /* Darker glass for secondary */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      /* Gel/Bubble Light Effect */
+      box-shadow:
+        inset 1px 2px 3px rgba(255, 255, 255, 0.4),
+        inset -1px -2px 3px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      overflow: hidden;
+    }
+
+    .btn-hero-circle:hover,
+    .btn-hero-pill:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow:
+        inset 1px 2px 4px rgba(255, 255, 255, 0.7),
+        inset -1px -2px 4px rgba(0, 0, 0, 0.3),
+        0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Hover Shine Effect */
+    @keyframes glassShineHover {
+      0% {
+        left: -150%;
+      }
+
+      100% {
+        left: 150%;
+      }
+    }
+
+    .btn-hero-circle::before,
+    .btn-hero-pill::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(to right,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.5) 50%,
+          rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-25deg);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .btn-hero-circle:hover::before,
+    .btn-hero-pill:hover::before {
+      animation: glassShineHover 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-hero-circle {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .btn-hero-circle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-hero-pill {
+      height: 46px;
+      padding: 0 30px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* Bottom-left "Explore Models" badge */
+    .hero-explore {
+      position: absolute;
+      bottom: 38px;
+      left: 6%;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .hero-explore:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-2px);
+    }
+
+    .hero-explore-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 10px #38bdf8;
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.4);
+        opacity: 0.7;
+      }
+    }
+
+    /* ─── SERVICES (ASYMMETRIC GRID) ─── */
+    .services {
+      padding: 0 7% 110px;
+      background: #080c18;
+      text-align: left;
+      margin-top: -2px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 900;
+      margin-bottom: 60px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -10px;
+      right: -10px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.15);
+      z-index: 1;
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+
+    .section-title span {
+      background: linear-gradient(90deg, var(--magic-1), var(--magic-2), var(--magic-3), var(--magic-1));
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: magic-flow 6s linear infinite;
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    /* ══════════════════════════════════════
+       FLIP CARD SYSTEM
+    ══════════════════════════════════════ */
+
+    /* Auto shine sweep keyframe — sweeps fast, then waits (3.5s cycle) */
+    @keyframes shineSweep {
+      0% {
+        left: -120%;
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      30% {
+        left: 160%;
+        opacity: 0;
+      }
+
+      100% {
+        left: 160%;
+        opacity: 0;
+      }
+    }
+
+    /* Animated border glow keyframe */
+    @keyframes borderGlow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Wrapper: sets perspective for 3D depth */
+    .service-card {
+      perspective: 1200px;
+      min-height: 280px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    /* Inner container that actually flips */
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    /* Flip on hover */
+    .service-card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* ── SHARED FACE STYLES ── */
+    .card-front,
+    .card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── FRONT FACE ── */
+    .card-front {
+      background: linear-gradient(145deg, #0e1020 0%, #0a0b18 60%, #0c0e1a 100%);
+      padding: 14px 16px 12px;
+      justify-content: space-between;
+      align-items: flex-start;
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      /* Outer glow for highlight effect */
+      box-shadow:
+        0 0 18px rgba(99, 102, 241, 0.25),
+        0 0 40px rgba(168, 85, 247, 0.12),
+        inset 0 0 0 1px rgba(99, 102, 241, 0.3);
+      transition: box-shadow 0.4s ease;
+    }
+
+    .service-card:hover .card-front {
+      box-shadow:
+        0 0 30px rgba(99, 102, 241, 0.5),
+        0 0 60px rgba(168, 85, 247, 0.25),
+        inset 0 0 0 1px rgba(168, 85, 247, 0.5);
+    }
+
+    /* ── Animated gradient border on card-front ── */
+    .service-card .card-front {
+      position: relative;
+    }
+
+    /* Glowing border pseudo-element — always visible, pulses on hover */
+    .service-card .card-front::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 22px;
+      background: linear-gradient(120deg,
+          rgba(99, 102, 241, 1),
+          rgba(168, 85, 247, 1),
+          rgba(34, 211, 238, 1),
+          rgba(99, 102, 241, 1));
+      background-size: 300% 300%;
+      animation: borderGlow 3s ease infinite;
+      z-index: -1;
+      opacity: 0.7;
+      transition: opacity 0.4s ease;
+    }
+
+    .service-card:hover .card-front::before {
+      opacity: 1;
+      inset: -2.5px;
+    }
+
+    /* Shine sweep overlay — runs automatically in a loop */
+    .service-card .card-front::after {
+      content: "";
+      position: absolute;
+      top: -20%;
+      left: -120%;
+      width: 70%;
+      /* wider streak */
+      height: 160%;
+      background: linear-gradient(105deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.15) 30%,
+          rgba(255, 255, 255, 0.55) 50%,
+          /* much brighter center */
+          rgba(255, 255, 255, 0.15) 70%,
+          rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-20deg);
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0;
+      /* 3s cycle — quicker and more noticeable */
+      animation: shineSweep 3s ease-in-out infinite;
+    }
+
+    /* Staggered delays — each card shines 0.5s apart */
+    .service-card:nth-child(1) .card-front::after {
+      animation-delay: 0s;
+    }
+
+    .service-card:nth-child(2) .card-front::after {
+      animation-delay: 0.5s;
+    }
+
+    .service-card:nth-child(3) .card-front::after {
+      animation-delay: 1.0s;
+    }
+
+    .service-card:nth-child(4) .card-front::after {
+      animation-delay: 1.5s;
+    }
+
+    .service-card:nth-child(5) .card-front::after {
+      animation-delay: 2.0s;
+    }
+
+    .service-card:nth-child(6) .card-front::after {
+      animation-delay: 2.5s;
+    }
+
+    /* Front top area: badge + h3 */
+    .card-front-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    /* Front bottom: subtitle + button */
+    .card-front-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+    }
+
+    /* ── BACK FACE ── */
+    .card-back {
+      background: linear-gradient(145deg, #10122a 0%, #0d0f24 60%, #0a0c1e 100%);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      padding: 14px 16px 12px;
+      transform: rotateY(180deg);
+      justify-content: flex-start;
+      gap: 0;
+    }
+
+    /* Top accent line on back */
+    .card-back::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.8), rgba(34, 211, 238, 0.7), transparent);
+      z-index: 4;
+    }
+
+    /* Back title */
+    .card-back-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--magic-3);
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── BADGE / PRICE TAG ── */
+    .badge {
+      display: inline-block;
+      font-size: 0.5rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 50px;
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      background: rgba(34, 211, 238, 0.08);
+      color: var(--magic-3) !important;
+      margin-bottom: 4px;
+      width: fit-content;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Shimmer on badge */
+    .badge::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: skewX(-20deg);
+      animation: badgeShimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes badgeShimmer {
+
+      0%,
+      60% {
+        left: -80%;
+      }
+
+      80%,
+      100% {
+        left: 140%;
+      }
+    }
+
+    /* ── CARD TITLE (FRONT) ── */
+    .card-front h3 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0;
+      color: #fff;
+      line-height: 1.15;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .card-front .subtitle {
+      font-size: 0.65rem;
+      color: rgba(148, 163, 184, 0.9);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* ── FEATURE LIST (BACK) ── */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.63rem;
+      color: rgba(226, 232, 240, 0.85);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1.25;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Checkmark dot */
+    .feature-list li::before {
+      content: "";
+      flex-shrink: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #a855f7) center/cover;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 6L5 8.5L9.5 4' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: cover;
+    }
+
+    /* Hover hint text on back */
+    .card-back-hint {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.2);
+      margin-top: 14px;
+      text-align: right;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 1024px) {
+      .service-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .service-container {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card,
+      .card-inner {
+        min-height: 220px;
+      }
+
+      .card-front {
+        padding: 12px 14px;
+      }
+
+      .card-back {
+        padding: 12px 14px;
+      }
+    }
+
+    /* ─── SERVICE BOTTOM CAR ─── */
+    .service-bottom-car-container {
+      width: 100%;
+      margin-top: 80px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .service-bottom-car {
+      max-width: 90%;
+      height: auto;
+      border-radius: 20px;
+      mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+      filter: drop-shadow(0 0 40px rgba(99, 102, 241, 0.25));
+      transition: transform 0.5s ease;
+    }
+
+    .service-bottom-car:hover {
+      transform: scale(1.02);
+      filter: drop-shadow(0 0 60px rgba(99, 102, 241, 0.4));
+    }
+
+    .car-glow-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ─── PROCESS SECTION ─── */
+    .process-section {
+      padding: 100px 7% 120px;
+      background: #080c18;
+      position: relative;
+    }
+
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: flex-start;
+      margin-bottom: 80px;
+    }
+
+    .process-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+    }
+
+    .process-header-right p {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .process-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: gap 0.3s ease;
+    }
+
+    .process-link::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: var(--magic-3);
+    }
+
+    .process-link:hover {
+      gap: 18px;
+    }
+
+    .process-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 40px;
+    }
+
+    .process-tab {
+      padding: 24px 0;
+      cursor: pointer;
+      position: relative;
+      color: rgba(255, 255, 255, 0.4);
+      transition: color 0.3s ease;
+    }
+
+    .process-tab.active {
+      color: #fff;
+    }
+
+    .process-progress-bg {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .process-progress-bar {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--magic-3);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+
+    .process-tab h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .process-tab h4 span {
+      margin-right: 8px;
+      font-weight: 400;
+    }
+
+    .process-content {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #0a0b0e;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .process-image-container {
+      position: relative;
+      aspect-ratio: 16/7;
+      overflow: hidden;
+    }
+
+    .process-image-container::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* Left is very dark for text legibility, fades out to right */
+      background: linear-gradient(to right, rgba(8, 12, 24, 0.95) 0%, rgba(8, 12, 24, 0.6) 45%, rgba(8, 12, 24, 0) 100%);
+      z-index: 2;
+    }
+
+    .process-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .process-image.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .process-overlay-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 0 60px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 55%;
+    }
+
+    .process-overlay-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .process-accent-bar {
+      width: 60px;
+      height: 4px;
+      background: var(--magic-2);
+      margin-bottom: 25px;
+    }
+
+    .process-description-text {
+      color: #e2e8f0;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .process-overlay-number {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.1);
+      z-index: 5;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    @media (max-width: 900px) {
+      .process-header {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .process-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-image-container {
+        aspect-ratio: 16/10;
+      }
+
+      .process-overlay-title {
+        font-size: 1.5rem;
+        top: 20px;
+        left: 20px;
+      }
+
+      .process-overlay-number {
+        top: 20px;
+        right: 20px;
+      }
+    }
+
+    .about {
+      padding: 110px 7%;
+      background: linear-gradient(180deg, #06090f 0%, var(--bg) 100%);
+      text-align: center;
+    }
+
+    .about-text {
+      max-width: 680px;
+      margin: 0 auto 50px;
+      color: #b8c8d8;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 26px;
+      margin-bottom: 44px;
+    }
+
+    .about-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      border-radius: 20px;
+      padding: 32px;
+      transition: 0.3s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+    }
+
+    .about-card h3 {
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .about-cta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Shared buttons */
+    .btn {
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: var(--gold);
+      color: #000;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 260px;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(8, 12, 24, 0.96);
+        backdrop-filter: blur(20px);
+        padding: 40px 30px;
+        gap: 28px;
+        transition: right 0.35s ease;
+        z-index: 998;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 1rem;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero-content {
+        margin-top: 0;
+        padding: 0 20px;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .hero-explore {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .hero-explore:hover {
+        transform: translateX(-50%) translateY(-2px);
+      }
+    }
+
+    /* ─── PAINTING SERVICES SECTION ─── */
+    .painting-section {
+      padding: 110px 8% 40px;
+      /* Reduced bottom padding */
+      background: #080c18;
+      /* Matches hero section bottom (rgb 8, 12, 24) */
+      margin-top: -2px;
+      /* completely removes subpixel split lines */
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* Subtle blue glow */
+    .painting-section::before {
+      content: "";
+      position: absolute;
+      bottom: -150px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(8, 12, 24, 0) 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .painting-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Left Side */
+    .painting-left {
+      flex: 1.2;
+      min-width: 350px;
+      margin-top: -320px;
+      /* Force position much higher */
+    }
+
+    .painting-left h2 {
+      font-size: 3rem;
+      line-height: 1.25;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    /* Right Side */
+    .painting-right {
+      flex: 1;
+      min-width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .painting-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .painting-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-top: 2px;
+      color: #3b82f6;
+      /* Bright blue match */
+    }
+
+    .painting-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .painting-text {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .painting-text h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .painting-text p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .btn-about {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 32px;
+      background: linear-gradient(90deg, var(--magic-1), var(--magic-2), var(--magic-3), var(--magic-1));
+      background-size: 300% auto;
+      animation: magic-flow 8s linear infinite;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-about:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+    }
+
+    /* ─── CARD FRONT IMAGE ─── */
+    .card-front-img {
+      width: calc(100% + 32px);
+      margin-left: -16px;
+      margin-bottom: -12px;
+      height: 130px;
+      object-fit: cover;
+      object-position: center 40%;
+      border-radius: 0 0 20px 20px;
+      display: block;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+      opacity: 0.85;
+      transition: opacity 0.3s ease, transform 0.4s ease;
+    }
+
+    .service-card:hover .card-front-img {
+      opacity: 0.5;
+      transform: scale(1.03);
+    }
+
+    /* ─── BOOK THIS PACKAGE BUTTON ─── */
+    .btn-service-book {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--magic-1), var(--magic-2), var(--magic-3), var(--magic-1));
+      background-size: 300% auto;
+      animation: magic-flow 6s linear infinite;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-service-book:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+    }
+
+    /* ─── GALLERY SECTION ─── */
+    .gallery-section {
+      padding: 100px 7%;
+      background: #030714;
+      position: relative;
+    }
+
+    .gallery-container {
+      width: 100%;
+      min-height: 800px;
+      position: relative;
+      margin-top: 50px;
+    }
+
+    .list.masonry-list {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .item-wrapper {
+      position: absolute;
+      will-change: transform, width, height, opacity;
+      padding: 12px;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+    }
+
+    .item-wrapper > .item-img {
+      position: relative;
+      background-size: cover;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .item-img .color-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, rgba(99,102,241,0.5), rgba(34,211,238,0.5));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ─── PRODUCTS SECTION (PINNED HORIZONTAL SCROLL) ─── */
+    .products-section {
+      height: 100vh;
+      background: #030714;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5vh;
+    }
+
+    .products-section .section-title {
+      margin-bottom: 20px;
+      padding: 0 7%;
+    }
+
+    .marquee-container {
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 10px 0;
+    }
+
+    /* Gradient masks to fade edges seamlessly */
+    .marquee-container::before,
+    .marquee-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 15vw;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee-container::before {
+      left: 0;
+      background: linear-gradient(to right, #030714 0%, transparent 100%);
+    }
+
+    .marquee-container::after {
+      right: 0;
+      background: linear-gradient(to left, #030714 0%, transparent 100%);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 40px;
+      padding: 20px 0;
+      min-width: max-content;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 50px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50px;
+      font-size: 1.8rem;
+      font-weight: 800;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      color: #94a3b8;
+      letter-spacing: 0.1em;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-pill::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--magic-1), var(--magic-2), var(--magic-3));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .brand-pill > span {
+      position: relative;
+      z-index: 1;
+      transition: color 0.4s ease;
+    }
+
+    .brand-pill:hover {
+      transform: translateY(-5px) scale(1.05);
+      border-color: transparent;
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+    }
+
+    .brand-pill:hover::before {
+      opacity: 0.15;
+    }
+
+    .brand-pill:hover > span {
+      color: #fff;
+    }
+
+    /* ─── TESTIMONIALS SECTION ─── */
+    .testimonials-section {
+      padding: 100px 7%;
+      background: #030714;
+      position: relative;
+      z-index: 100; /* Extremely high to stay above pin-spacers */
+      min-height: 100vh; /* Force height */
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+      max-width: 1200px;
+      margin-inline: auto;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 40px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 1 !important; /* Force visibility fallback */
+      min-height: 250px;
+    }
+
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--magic-1), var(--magic-2));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-15px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .testimonial-card:hover::before {
+      opacity: 0.05;
+    }
+
+    .testimonial-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stars {
+      color: #fbbf24;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .review-text {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .client-info {
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+    }
+
+    .client-name {
+      display: block;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .client-car {
+      display: block;
+      color: var(--magic-2);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      font-weight: 300;
+      opacity: 0.7;
+    }
+
+    /* ─── ABOUT MINIMAL ─── */
+    .about-minimal {
+      padding: 120px 7%;
+      background: #000;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .about-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about-desc {
+      font-size: 24px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.7);
+      margin: 40px 0 60px;
+      font-weight: 300;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 60px;
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ─── MAIN FOOTER ─── */
+    .main-footer {
+      background: #000;
+      color: #fff;
+      padding: 100px 7% 40px;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 100;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 50px;
+      margin-bottom: 80px;
+    }
+
+    .footer-brand .footer-logo {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .footer-brand .footer-logo span {
+      font-weight: 300;
+      opacity: 0.7;
+    }
+
+    .footer-motto {
+      font-size: 18px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 300px;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 20px;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 15px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+      padding-left: 5px;
+    }
+
+    .contact-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      font-size: 20px;
+    }
+
+    .contact-title::before {
+      content: '';
+      width: 25px;
+      height: 2px;
+      background: #ff0000; /* Red line as seen in image */
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 45px);
+      gap: 12px;
+    }
+
+    .social-box {
+      width: 45px;
+      height: 45px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.4s ease;
+    }
+
+    .social-box:hover {
+      border-color: #fff;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+    }
+
+    .footer-policies a {
+      color: inherit;
+      text-decoration: none;
+      margin-left: 30px;
+    }
+
+    @media (max-width: 968px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+      .footer-policies a {
+        margin: 0 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <header class="navbar">
+    <a href="#" class="logo">Lux<span>Drive</span></a>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#whyus">Why Us</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a href="#" class="nav-cta">Get Started</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">&#9776;</button>
+  </header>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero" id="home">
+
+    <!-- Background car image -->
+    <img class="hero-bg" src="carfit.png" alt="Luxury electric car cinematic view" />
+
+    <!-- Dark gradient overlay -->
+    <div class="hero-overlay-bg"></div>
+
+    <!-- Centered text + CTA -->
+    <div class="hero-content">
+      <p>Experience the perfect blend of performance,<br>design, and sustainability.</p>
+      <div class="hero-btn-group">
+        <a href="#" class="btn-hero-pill">Book Appointment</a>
+        <a href="#services" class="btn-hero-pill">View Packages</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── PAINTING SERVICES SECTION ─── -->
+  <section class="painting-section" id="whyus">
+    <div class="painting-container">
+
+      <!-- Define Golden Gradient for icons -->
+      <svg width="0" height="0" style="position:absolute">
+        <defs>
+          <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6366f1" />
+            <stop offset="50%" stop-color="#a855f7" />
+            <stop offset="100%" stop-color="#22d3ee" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Left side: Big Heading -->
+      <div class="painting-left">
+        <h2>WE OFFER PAINTING<br>SERVICES FOR CARS<br>OF ALL BRANDS</h2>
+      </div>
+
+      <!-- Right side: Content from old renov items -->
+      <div class="painting-right">
+
+        <div class="painting-item">
+          <!-- Truck / Mobile icon -->
+          <div class="painting-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <div class="painting-text">
+            <h3>We Come To You</h3>
+            <p>Fully equipped mobile unit. We detail at your home, office, or parking spot. Zero travel hassle, maximum
+              shine.</p>
+          </div>
+        </div>
+
+        <div class="painting-item">
+          <!-- Droplet / Product icon -->
+          <div class="painting-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            </svg>
+          </div>
+          <div class="painting-text">
+            <h3>Lab-Grade Products</h3>
+            <p>We use only professional-grade detailing compounds — CarPro, Koch Chemie, Rupes — zero compromise on
+              quality.</p>
+          </div>
+        </div>
+
+        <div class="painting-item">
+          <!-- Shield Check / Satisfaction icon -->
+          <div class="painting-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+          </div>
+          <div class="painting-text">
+            <h3>Satisfaction Guaranteed</h3>
+            <p>Not happy? We come back and make it right. Every time. No questions asked.</p>
+          </div>
+        </div>
+
+        <div class="painting-item">
+          <!-- Calendar / Scheduling icon -->
+          <div class="painting-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="painting-text">
+            <h3>Flexible Scheduling</h3>
+            <p>Book any day of the week, 7 AM – 7 PM. We work around your schedule, not the other way around.</p>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn-about" style="margin-top: 10px;">Book Appointment</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- ─── SERVICES ─── -->
+  <section class="services" id="services">
+    <h2 class="section-title">Our <span>Services</span></h2>
+
+    <div class="service-container">
+
+      <!-- 1. EXPRESS DETAIL -->
+      <div class="service-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-front-top">
+              <span class="badge">STARTING AT &#8377; 1,999</span>
+              <h3>Express<br>Detail</h3>
+            </div>
+            <div class="card-front-bottom">
+              <img class="card-front-img" src="service_ferrari_red_1774953144261.png" alt="Ferrari" />
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-back-title">What's Included</div>
+            <p class="subtitle" style="margin-bottom:8px;">A swift yet thorough refresh for your vehicle &mdash; perfect
+              for regular upkeep.</p>
+            <ul class="feature-list">
+              <li>Hand wash &amp; wheel clean</li>
+              <li>Premium 2&ndash;4 week wax</li>
+              <li>Tire dressing (satin finish)</li>
+              <li>Air blow cracks &amp; door jams</li>
+              <li>Interior vacuum &amp; wipe-down</li>
+              <li>Window cleaning inside &amp; out</li>
+            </ul>
+            <button class="btn-service-book" type="button" onclick="location.href='#contact'">Book This Package</button>
+            <p class="card-back-hint">Move away to flip back &#8617;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. FULL DETAIL -->
+      <div class="service-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-front-top">
+              <span class="badge">STARTING AT &#8377; 2,999</span>
+              <h3>Full<br>Detail</h3>
+            </div>
+            <div class="card-front-bottom">
+              <img class="card-front-img" src="service_lambo_yellow_1774953173938.png" alt="Lamborghini" />
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-back-title">What's Included</div>
+            <p class="subtitle" style="margin-bottom:8px;">The complete alchemy treatment &mdash; every inch of your car
+              brought back to life.</p>
+            <ul class="feature-list">
+              <li>Hand wash with premium shampoo</li>
+              <li>Premium quality wax (2&ndash;4 weeks)</li>
+              <li>All interior surfaces scrubbed</li>
+              <li>Deep vacuum: carpets, seats, mats</li>
+              <li>Engine bay light clean</li>
+              <li>Leather conditioning treatment</li>
+            </ul>
+            <button class="btn-service-book" type="button" onclick="location.href='#contact'">Book This Package</button>
+            <p class="card-back-hint">Move away to flip back &#8617;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. DECONTAMINATION -->
+      <div class="service-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-front-top">
+              <span class="badge">STARTING AT &#8377; 3,999</span>
+              <h3>Decontamination</h3>
+            </div>
+            <div class="card-front-bottom">
+              <img class="card-front-img" src="service_audi_orange_1774953231641.png" alt="Audi" />
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-back-title">What's Included</div>
+            <p class="subtitle" style="margin-bottom:8px;">Deep science for stubborn contaminants &mdash; iron, tar,
+              water spots eliminated.</p>
+            <ul class="feature-list">
+              <li>Clay bar &amp; iron treatment</li>
+              <li>Water spot &amp; tar removal</li>
+              <li>Leather seat treatment</li>
+              <li>Rubber floor mat deep clean</li>
+              <li>Thorough vacuuming</li>
+              <li>Paint surface prep coat</li>
+            </ul>
+            <button class="btn-service-book" type="button" onclick="location.href='#contact'">Book This Package</button>
+            <p class="card-back-hint">Move away to flip back &#8617;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. CERAMIC COATING -->
+      <div class="service-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-front-top">
+              <span class="badge">STARTING AT &#8377; 9,999</span>
+              <h3>Ceramic<br>Coating</h3>
+            </div>
+            <div class="card-front-bottom">
+              <img class="card-front-img" src="service_koenigsegg_white_1774953200395.png" alt="Koenigsegg" />
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-back-title">What's Included</div>
+            <p class="subtitle" style="margin-bottom:8px;">Long-lasting nano-ceramic protection &mdash; repels water,
+              UV, and contamination for years.</p>
+            <ul class="feature-list">
+              <li>Full paint decontamination</li>
+              <li>Machine paint correction</li>
+              <li>Professional ceramic application</li>
+              <li>2&ndash;5 year protection warranty</li>
+              <li>Hydrophobic finish</li>
+              <li>UV &amp; scratch resistance</li>
+            </ul>
+            <button class="btn-service-book" type="button" onclick="location.href='#contact'">Book This Package</button>
+            <p class="card-back-hint">Move away to flip back &#8617;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. PAINT CORRECTION -->
+      <div class="service-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-front-top">
+              <span class="badge">STARTING AT &#8377; 5,999</span>
+              <h3>Paint<br>Correction</h3>
+            </div>
+            <div class="card-front-bottom">
+              <img class="card-front-img" src="service_merc_black_1774953400000_1774953260285.png" alt="Mercedes" />
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-back-title">What's Included</div>
+            <p class="subtitle" style="margin-bottom:8px;">Swirl marks, scratches, and oxidation dissolved with machine
+              polishing mastery.</p>
+            <ul class="feature-list">
+              <li>Single or dual-stage polishing</li>
+              <li>Swirl mark elimination</li>
+              <li>Light scratch removal</li>
+              <li>Paint depth measurement</li>
+              <li>Finishing polish</li>
+              <li>Paint sealant application</li>
+            </ul>
+            <button class="btn-service-book" type="button" onclick="location.href='#contact'">Book This Package</button>
+            <p class="card-back-hint">Move away to flip back &#8617;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. PPF WRAP -->
+      <div class="service-card">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-front-top">
+              <span class="badge">STARTING AT &#8377; 14,999</span>
+              <h3>PPF<br>Wrap</h3>
+            </div>
+            <div class="card-front-bottom">
+              <img class="card-front-img" src="service_bugatti_blue_1774953400000_1774953291278.png" alt="Bugatti" />
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-back-title">What's Included</div>
+            <p class="subtitle" style="margin-bottom:8px;">Paint Protection Film &mdash; invisible armour against stone
+              chips, bugs, and road debris.</p>
+            <ul class="feature-list">
+              <li>Partial or full body coverage</li>
+              <li>Self-healing film technology</li>
+              <li>10-year warranty coverage</li>
+              <li>High-clarity optical finish</li>
+              <li>Pre-cut precision application</li>
+              <li>Post-install ceramic top coat</li>
+            </ul>
+            <button class="btn-service-book" type="button" onclick="location.href='#contact'">Book This Package</button>
+            <p class="card-back-hint">Move away to flip back &#8617;</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ─── PROCESS ─── -->
+    <section class="process-section" id="process">
+      <div class="process-header">
+        <h2 class="gsap-reveal">From Desire to Drive:<br>A Simple Process</h2>
+        <div class="process-header-right gsap-reveal">
+          <p>Turning your dream of driving a luxury car into reality has never been this effortless - just follow these
+            easy steps and hit the road in style.</p>
+          <a href="#contact" class="process-link">Take The First Step</a>
+        </div>
+      </div>
+
+      <div class="process-tabs gsap-reveal">
+        <div class="process-tab active" data-step="0">
+          <div class="process-progress-bg"></div>
+          <div class="process-progress-bar"></div>
+          <h4><span>01:</span> Book Online</h4>
+        </div>
+        <div class="process-tab" data-step="1">
+          <div class="process-progress-bg"></div>
+          <div class="process-progress-bar"></div>
+          <h4><span>02:</span> We Arrive</h4>
+        </div>
+        <div class="process-tab" data-step="2">
+          <div class="process-progress-bg"></div>
+          <div class="process-progress-bar"></div>
+          <h4><span>03:</span> We Transform</h4>
+        </div>
+        <div class="process-tab" data-step="3">
+          <div class="process-progress-bg"></div>
+          <div class="process-progress-bar"></div>
+          <h4><span>04:</span> Drive Away</h4>
+        </div>
+      </div>
+
+
+      <div class="process-content gsap-reveal">
+        <div class="process-image-container">
+          <img src="carfit.png" alt="Book Online" class="process-image active" data-step="0">
+          <img src="service_ferrari_red_1774953144261.png" alt="We Arrive" class="process-image" data-step="1">
+          <img src="service_bugatti_blue_1774953400000_1774953291278.png" alt="We Transform" class="process-image"
+            data-step="2">
+          <img src="service_merc_black_1774953400000_1774953260285.png" alt="Drive Away" class="process-image"
+            data-step="3">
+
+          <div class="process-overlay-content">
+            <h3 class="process-overlay-title">Book Online</h3>
+            <div class="process-accent-bar"></div>
+            <p class="process-description-text" style="opacity: 1; transform: none;">
+              Choose your package and pick a time slot that works for you. Takes under 2 minutes.
+            </p>
+          </div>
+          
+          <span class="process-overlay-number">01</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── GALLERY ─── -->
+    <section class="gallery-section" id="gallery">
+      <h2 class="section-title">Luxury <span>Gallery</span></h2>
+      <div class="gallery-container">
+        <div class="list masonry-list" id="masonryContainer"></div>
+      </div>
+    </section>
+
+    <!-- ─── PRODUCTS WE TRUST (MARQUEE) ─── -->
+    <section class="products-section" id="products">
+      <h2 class="section-title">Trusted By <span>The Best</span></h2>
+      
+      <div class="marquee-container">
+        <!-- The track contains 2 identical sets of brands so it loops seamlessly -->
+        <div class="marquee-track">
+          <!-- Set 1 -->
+          <div class="brand-pill"><span>CARPRO</span></div>
+          <div class="brand-pill"><span>KOCH CHEMIE</span></div>
+          <div class="brand-pill"><span>RUPES</span></div>
+          <div class="brand-pill"><span>VONIX</span></div>
+          <div class="brand-pill"><span>MEGUIAR'S</span></div>
+          <div class="brand-pill"><span>SONAX</span></div>
+          
+          <!-- Set 2 (Duplicate for infinite loop) -->
+          <div class="brand-pill"><span>CARPRO</span></div>
+          <div class="brand-pill"><span>KOCH CHEMIE</span></div>
+          <div class="brand-pill"><span>RUPES</span></div>
+          <div class="brand-pill"><span>VONIX</span></div>
+          <div class="brand-pill"><span>MEGUIAR'S</span></div>
+          <div class="brand-pill"><span>SONAX</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ─── -->
+    <section class="testimonials-section" id="testimonials">
+      <h2 class="section-title">Client <span>Experiences</span></h2>
+      <div class="testimonials-grid" id="testimonialGrid">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"Absolutely blown away by the PPF work on my Porsche 911. The attention to detail is unmatched, and the team was incredibly professional."</p>
+            <div class="client-info">
+              <span class="client-name">Raghav M.</span>
+              <span class="client-car">Porsche 911 GT3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"Their ceramic coating made my Range Rover look better than the day I bought it. The hydrophobic effect is insane!"</p>
+            <div class="client-info">
+              <span class="client-name">Anita S.</span>
+              <span class="client-car">Range Rover Autobiography</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"The best detailing studio in the city, hands down. My Ferrari 488 looks flawless under every light. Truly premium service."</p>
+            <div class="client-info">
+              <span class="client-name">Vikram K.</span>
+              <span class="client-car">Ferrari 488 Spider</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MINIMALIST ABOUT SECTION ─── -->
+    <section class="about-minimal" id="about">
+      <div class="about-container">
+        <h2 class="section-title">The <span>Philosophy</span></h2>
+        <p class="about-desc">
+          We believe that a car is more than a machine; it's an enduring legacy of performance and style. 
+          Our mission is to preserve and enhance that legacy through meticulous craft and modern technology.
+        </p>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-num">500+</span>
+            <span class="stat-label">Exotics Protected</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Precision Finish</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Years of Craft</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MAIN FOOTER ─── -->
+    <footer class="main-footer" id="contact">
+      <div class="footer-grid">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <span class="footer-logo">Lux<span>Drive</span></span>
+          <p class="footer-motto">Luxury lies not in the car, but in how the moment endures.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Featured Cars</a></li>
+            <li><a href="#whyus">Why Choose Us?</a></li>
+            <li><a href="#process">How It Works</a></li>
+            <li><a href="#gallery">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Pages -->
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#gallery">Car Index</a></li>
+            <li><a href="#testimonials">404</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact & Socials -->
+        <div class="footer-col">
+          <div class="contact-title">Contact Us</div>
+          <div class="social-grid">
+            <a href="#" class="social-box"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-box"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-box"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-box"><i class="fab fa-snapchat-ghost"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>Copyright © 2025 LuxDrive— All Right Reserved</p>
+        <div class="footer-policies">
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      menuToggle.addEventListener("click", () => navLinks.classList.toggle("active"));
+
+      // GSAP animations
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero text entrance
+      gsap.from(".hero-content", {
+        y: 40, opacity: 0, duration: 1.2, ease: "power3.out", delay: 0.3
+      });
+
+
+      // Section title
+      gsap.from(".section-title", {
+        y: 50, opacity: 0, duration: 1,
+        scrollTrigger: { trigger: ".section-title", start: "top 80%" }
+      });
+
+      // Testimonials stagger reveal
+      if (document.querySelector("#testimonialGrid")) {
+        gsap.fromTo("#testimonialGrid .testimonial-card", 
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: "#testimonialGrid",
+              start: "top 85%",
+              onEnter: () => console.log("Testimonials entered!")
+            }
+          }
+        );
+      }
+
+
+
+      // Process logic
+      const processData = [
+        {
+          title: "Book Online",
+          number: "01",
+          text: "Choose your package and pick a time slot that works for you. Takes under 2 minutes."
+        },
+        {
+          title: "We Arrive",
+          number: "02",
+          text: "Our fully equipped team arrives at your location on time, every time — no waiting."
+        },
+        {
+          title: "We Transform",
+          number: "03",
+          text: "Meticulous detailing using professional-grade products and proven techniques."
+        },
+        {
+          title: "Drive Away",
+          number: "04",
+          text: "Inspect the results, approve, and drive away in a vehicle that feels brand new."
+        }
+      ];
+
+      const tabs = document.querySelectorAll('.process-tab');
+      const images = document.querySelectorAll('.process-image');
+      const progressBars = document.querySelectorAll('.process-progress-bar');
+      const overlayTitle = document.querySelector('.process-overlay-title');
+      const overlayNumber = document.querySelector('.process-overlay-number');
+      const descText = document.querySelector('.process-description-text');
+
+      let currentStep = 0;
+      let cycleInterval;
+      const CYCLE_DURATION = 3; // seconds
+
+      function switchStep(index) {
+        currentStep = index;
+
+        // Update tabs
+        tabs.forEach(t => t.classList.remove('active'));
+        tabs[index].classList.add('active');
+
+        // Update images
+        images.forEach(img => img.classList.remove('active'));
+        images[index].classList.add('active');
+
+        // Reset all progress bars
+        gsap.killTweensOf(progressBars);
+        gsap.set(progressBars, { scaleX: 0 });
+
+        // Start progress bar for active tab
+        gsap.to(progressBars[index], {
+          scaleX: 1,
+          duration: CYCLE_DURATION,
+          ease: "none"
+        });
+
+        // Animate content change
+        gsap.to([overlayTitle, overlayNumber, descText], {
+          opacity: 0,
+          y: 10,
+          duration: 0.3,
+          onComplete: () => {
+            overlayTitle.textContent = processData[index].title;
+            overlayNumber.textContent = processData[index].number;
+            descText.textContent = processData[index].text;
+
+            gsap.to([overlayTitle, overlayNumber, descText], {
+              opacity: 1,
+              y: 0,
+              duration: 0.4,
+              stagger: 0.05
+            });
+          }
+        });
+      }
+
+      function startCycle() {
+        stopCycle();
+        switchStep(currentStep);
+        cycleInterval = setInterval(() => {
+          let next = (currentStep + 1) % processData.length;
+          switchStep(next);
+        }, CYCLE_DURATION * 1000);
+      }
+
+      function stopCycle() {
+        clearInterval(cycleInterval);
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          stopCycle();
+          switchStep(index);
+          // Optional: restart cycle after manual click after some delay
+          setTimeout(startCycle, 2000);
+        });
+      });
+
+      // Start cycle when the section comes into view
+      ScrollTrigger.create({
+        trigger: ".process-section",
+        start: "top 70%",
+        onEnter: () => startCycle(),
+        onLeave: () => stopCycle(),
+        onEnterBack: () => startCycle(),
+        onLeaveBack: () => stopCycle()
+      });
+
+      // Process section reveals
+      gsap.from(".gsap-reveal", {
+        y: 40, opacity: 0, duration: 1, stagger: 0.2, ease: "power2.out",
+        scrollTrigger: { trigger: ".process-section", start: "top 80%" }
+      });
+
+      // About Minimal Reveal
+      gsap.from(".about-minimal .about-container > *", {
+        y: 30, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out",
+        scrollTrigger: { trigger: ".about-minimal", start: "top 80%" }
+      });
+
+      /* ─── VANILLA MASONRY GALLERY ─── */
+      class MasonryGallery {
+        constructor(config) {
+          this.container = document.getElementById(config.containerId);
+          this.items = config.items;
+          this.imagesReady = false;
+          this.grid = [];
+          this.hasMounted = false;
+          
+          this.config = {
+            ease: config.ease || 'power3.out',
+            duration: config.duration || 0.6,
+            stagger: config.stagger || 0.05,
+            animateFrom: config.animateFrom || 'bottom',
+            scaleOnHover: config.scaleOnHover !== false,
+            hoverScale: config.hoverScale || 0.95,
+            blurToFocus: config.blurToFocus !== false,
+            colorShiftOnHover: config.colorShiftOnHover || false
+          };
+
+          this.init();
+        }
+
+        async init() {
+          if (!this.container) return;
+          
+          // Preload images
+          await this.preloadImages(this.items.map(i => i.img));
+          this.imagesReady = true;
+
+          // Render DOM elements
+          this.renderElements();
+          
+          // Monitor resize
+          this.ro = new ResizeObserver(() => this.calculateGrid());
+          this.ro.observe(this.container);
+
+          // Listen to media queries to change columns dynamically
+          window.addEventListener('resize', () => this.calculateGrid());
+        }
+
+        preloadImages(urls) {
+          return Promise.all(urls.map(src => {
+            return new Promise(resolve => {
+              const img = new Image();
+              img.src = src;
+              img.onload = img.onerror = () => resolve();
+            });
+          }));
+        }
+
+        getColumns() {
+          const w = window.innerWidth;
+          if (w >= 1500) return 5;
+          if (w >= 1000) return 4;
+          if (w >= 600) return 3;
+          if (w >= 400) return 2;
+          return 1;
+        }
+
+        renderElements() {
+          this.container.innerHTML = '';
+          this.items.forEach(item => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'item-wrapper';
+            wrapper.dataset.key = item.id;
+            
+            // Hover logic
+            wrapper.addEventListener('mouseenter', () => {
+              if (this.config.scaleOnHover) gsap.to(wrapper, { scale: this.config.hoverScale, duration: 0.3, ease: 'power2.out' });
+              if (this.config.colorShiftOnHover) {
+                const overlay = wrapper.querySelector('.color-overlay');
+                if (overlay) gsap.to(overlay, { opacity: 0.4, duration: 0.3 });
+              }
+            });
+            wrapper.addEventListener('mouseleave', () => {
+              if (this.config.scaleOnHover) gsap.to(wrapper, { scale: 1, duration: 0.3, ease: 'power2.out' });
+              if (this.config.colorShiftOnHover) {
+                const overlay = wrapper.querySelector('.color-overlay');
+                if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
+              }
+            });
+
+            const imgDiv = document.createElement('div');
+            imgDiv.className = 'item-img';
+            imgDiv.style.backgroundImage = `url('${item.img}')`;
+
+            if (this.config.colorShiftOnHover) {
+              const overlay = document.createElement('div');
+              overlay.className = 'color-overlay';
+              imgDiv.appendChild(overlay);
+            }
+
+            wrapper.appendChild(imgDiv);
+            this.container.appendChild(wrapper);
+          });
+        }
+
+        calculateGrid() {
+          if (!this.imagesReady || !this.container) return;
+          
+          const columns = this.getColumns();
+          const crRect = this.container.getBoundingClientRect();
+          const width = crRect.width;
+          if (width === 0) return;
+
+          const colHeights = new Array(columns).fill(0);
+          const columnWidth = width / columns;
+
+          this.grid = this.items.map(child => {
+            const col = colHeights.indexOf(Math.min(...colHeights));
+            const x = columnWidth * col;
+            const height = child.height / 2; // Original logic halving heights
+            const y = colHeights[col];
+
+            colHeights[col] += height;
+            return { ...child, x, y, w: columnWidth, h: height };
+          });
+          
+          this.container.style.height = `${Math.max(...colHeights)}px`;
+          
+          this.applyGrid();
+        }
+
+        getInitialPosition(item) {
+          const rect = this.container.getBoundingClientRect();
+          let direction = this.config.animateFrom;
+          if (direction === 'random') {
+            const dirs = ['top', 'bottom', 'left', 'right'];
+            direction = dirs[Math.floor(Math.random() * dirs.length)];
+          }
+
+          switch (direction) {
+            case 'top': return { x: item.x, y: -200 };
+            case 'bottom': return { x: item.x, y: window.innerHeight + 200 };
+            case 'left': return { x: -200, y: item.y };
+            case 'right': return { x: window.innerWidth + 200, y: item.y };
+            default: return { x: item.x, y: item.y + 100 };
+          }
+        }
+
+        applyGrid() {
+          this.grid.forEach((item, index) => {
+            const wrapper = this.container.querySelector(`[data-key="${item.id}"]`);
+            if (!wrapper) return;
+
+            const animationProps = {
+              x: item.x,
+              y: item.y,
+              width: item.w,
+              height: item.h
+            };
+
+            if (!this.hasMounted) {
+              const initialPos = this.getInitialPosition(item);
+              gsap.set(wrapper, {
+                opacity: 0,
+                x: initialPos.x,
+                y: initialPos.y,
+                width: item.w,
+                height: item.h,
+                filter: this.config.blurToFocus ? 'blur(10px)' : 'none'
+              });
+
+              gsap.to(wrapper, {
+                opacity: 1,
+                ...animationProps,
+                filter: this.config.blurToFocus ? 'blur(0px)' : 'none',
+                duration: 0.8,
+                ease: 'power3.out',
+                delay: index * this.config.stagger,
+                scrollTrigger: {
+                  trigger: this.container,
+                  start: "top 80%"
+                }
+              });
+            } else {
+              gsap.to(wrapper, {
+                ...animationProps,
+                duration: this.config.duration,
+                ease: this.config.ease,
+                overwrite: 'auto'
+              });
+            }
+          });
+
+          this.hasMounted = true;
+        }
+      }
+
+      // Initialize Masonry Gallery with project images
+      const galleryItems = [
+        { id: '1', img: 'car2.png', height: 600 },
+        { id: '2', img: 'service_ferrari_red_1774953144261.png', height: 400 },
+        { id: '3', img: 'car3.png', height: 800 },
+        { id: '4', img: 'service_bugatti_blue_1774953400000_1774953291278.png', height: 500 },
+        { id: '5', img: 'hero_car.png', height: 900 },
+        { id: '6', img: 'service_merc_black_1774953400000_1774953260285.png', height: 450 },
+        { id: '7', img: 'service_koenigsegg_white_1774953200395.png', height: 550 },
+        { id: '8', img: 'renovation_car.png', height: 700 },
+        { id: '9', img: 'car gold.png', height: 500 }
+      ];
+
+      setTimeout(() => {
+        if(document.getElementById('masonryContainer')) {
+          new MasonryGallery({
+            containerId: 'masonryContainer',
+            items: galleryItems,
+            animateFrom: 'bottom',
+            scaleOnHover: true,
+            hoverScale: 0.95,
+            blurToFocus: true,
+            colorShiftOnHover: true
+          });
+        }
+      }, 500);
+
+      // Scroll-linked Pinned Marquee for Products Section
+      const productsSection = document.querySelector(".products-section");
+      const marqueeTrack = document.querySelector(".marquee-track");
+
+      if (productsSection && marqueeTrack) {
+        // Calculate the maximum scroll distance so the track ends perfectly at the right edge
+        const getScrollAmount = () => -(marqueeTrack.scrollWidth - window.innerWidth + 100);
+
+        gsap.to(marqueeTrack, {
+          x: getScrollAmount,
+          ease: "none",
+          scrollTrigger: {
+            trigger: productsSection,
+            pin: true,
+            start: "top top",
+            end: () => "+=" + window.innerHeight,
+            scrub: 1,
+            invalidateOnRefresh: true
+          }
+        });
+
+        // Crucial: Refresh ScrollTrigger after adding pinning effects
+        ScrollTrigger.refresh();
+      }
+
+      // Final Global Refresh to fix layout overlaps
+      window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+      });
+
+    </script>
+</body>
+</html>
